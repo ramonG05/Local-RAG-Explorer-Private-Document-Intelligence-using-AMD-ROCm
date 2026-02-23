@@ -28,7 +28,7 @@ if uploaded_file:
         loader = PyPDFLoader("temp.pdf")
         docs = loader.load()
         
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1400, chunk_overlap=250)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1800, chunk_overlap=300)
         splits = text_splitter.split_documents(docs)
 
         # Creamos la base de datos en memoria (rápido)
@@ -43,7 +43,7 @@ if uploaded_file:
 
     if user_question:
         # Buscamos los 3 trozos más parecidos a la pregunta
-        context_docs = vectorstore.similarity_search(user_question, k=7)
+        context_docs = vectorstore.similarity_search(user_question, k=10)
         context_text = "\n\n".join([doc.page_content for doc in context_docs])
 
         # Creamos el Prompt para la IA
