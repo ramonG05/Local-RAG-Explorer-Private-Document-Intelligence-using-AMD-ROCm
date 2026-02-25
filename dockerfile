@@ -1,5 +1,5 @@
 # 1. Usamos una versión ligera de Python como base
-FROM python:3.10-slim
+FROM python:3.13-slim
 
 # 2. Le decimos a Docker en qué carpeta interna va a trabajar
 WORKDIR /app
