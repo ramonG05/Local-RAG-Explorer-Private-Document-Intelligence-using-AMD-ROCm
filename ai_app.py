@@ -5,6 +5,13 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain_ollama import OllamaEmbeddings, ChatOllama
 
+# Esto intenta buscar si estás en Docker, si no, usa localhost
+ollama_host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+
+# Y luego usas la variable:
+llm = ChatOllama(model="llama3", base_url=ollama_host)
+embeddings = OllamaEmbeddings(model="llama3", base_url=ollama_host)
+
 # Configuración de la página
 st.set_page_config(page_title="RAG-Box Local AI", layout="wide")
 st.header("🤖 RAG-Box: Private AI Document Reader")
