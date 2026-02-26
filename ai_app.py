@@ -18,7 +18,7 @@ st.header("🤖 RAG-Box: Private AI Document Reader")
 
 # Sidebar para configuración
 with st.sidebar:
-    st.info("Corriendo localmente en: AMD Radeon RX 6950 XT")
+    st.info("Running locally on AMD Radeon rx 6950 xt")
     model_name = "llama3"
 
 # 1. Interfaz de subida
@@ -35,7 +35,7 @@ if uploaded_file:
         loader = PyPDFLoader("temp.pdf")
         docs = loader.load()
         
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1800, chunk_overlap=300)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=500)
         splits = text_splitter.split_documents(docs)
 
         # Creamos la base de datos en memoria (rápido)
@@ -50,7 +50,7 @@ if uploaded_file:
 
     if user_question:
         # Buscamos los 3 trozos más parecidos a la pregunta
-        context_docs = vectorstore.similarity_search(user_question, k=10)
+        context_docs = vectorstore.similarity_search(user_question, k=20)
         context_text = "\n\n".join([doc.page_content for doc in context_docs])
 
         # Creamos el Prompt para la IA
